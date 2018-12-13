@@ -19,7 +19,7 @@ export default class MainScr extends React.Component {
     combos:0,
     counter:0,
 
-    pattren:[1,2,4,4],
+    pattren:[2,1,4,1,2,4,3,2],
 
     activeBtnOne:false,
     activeBtnTwo:false,
@@ -79,7 +79,42 @@ export default class MainScr extends React.Component {
   counterPlay(number)
   {
        
-        this.sound.play()
+        //this.sound.play()
+        if(number===1)
+        {
+          this.one.stop()
+            this.two.stop()
+            this.three.stop()
+            this.four.stop()
+            this.one.play()
+        }
+
+        if(number===2)
+        {   
+            this.two.stop()
+            this.three.stop()
+            this.four.stop()
+            this.one.stop()
+            this.two.play()
+        }
+
+        if(number===3)
+        {
+          this.two.stop()
+          this.three.stop()
+          this.four.stop()
+          this.one.stop()
+            this.three.play()
+        }
+
+        if(number===4)
+        {
+            this.two.stop()
+            this.three.stop()
+            this.four.stop()
+            this.one.stop()
+            this.four.play()
+        }
         this.setState({counter:this.state.counter+1}, function(){this.guideline()})
         //this.guideline()
         let a = this.state.pattren.slice(); //creates the clone of the state
@@ -99,6 +134,7 @@ export default class MainScr extends React.Component {
       else
       {
         //alert('salah')
+        alert('GAME OVER'+'\n'+"Your combos : "+this.state.combos)
         this.setState({combos:0})
         this.setState({counter:0})
         this.sound.stop()
@@ -121,6 +157,30 @@ export default class MainScr extends React.Component {
   }
 
   sound = new Sound(require('../../android/app/src/res/raw/babys.mp3'), null, (error) => {
+      if (error) {
+        alert('asdasd')
+      }
+    });
+
+    one = new Sound(require('../../android/app/src/res/raw/one.mp3'), null, (error) => {
+      if (error) {
+        alert('asdasd')
+      }
+    });
+
+    two = new Sound(require('../../android/app/src/res/raw/two.mp3'), null, (error) => {
+      if (error) {
+        alert('asdasd')
+      }
+    });
+
+    three = new Sound(require('../../android/app/src/res/raw/three.mp3'), null, (error) => {
+      if (error) {
+        alert('asdasd')
+      }
+    });
+
+    four = new Sound(require('../../android/app/src/res/raw/four.mp3'), null, (error) => {
       if (error) {
         alert('asdasd')
       }
@@ -211,10 +271,10 @@ export default class MainScr extends React.Component {
 
           <ViewOverflow style={{zIndex:10}}>
                 <View style={{flexDirection:'row', padding:5}}>
-                      <View style={{flex:1,paddingTop:10,paddingBottom:10, paddingleft:5, paddingRight:5}}><TouchableOpacity onPress={()=>this.counterPlay(1) } style={{backgroundColor:this.state.defaultColorBtnOne ,height:70, borderRadius:100,justifyContent:'center'}}><Text style={{ textAlign:'center',color:'#FEA7CE',fontSize:40}}>BA</Text></TouchableOpacity></View>
-                      <View style={{flex:1,paddingTop:10,paddingBottom:10, paddingleft:5, paddingRight:5}}><TouchableOpacity onPress={()=>this.counterPlay(2) } style={{backgroundColor:this.state.defaultColorBtnTwo,height:70, borderRadius:100,justifyContent:'center'}}><Text style={{ textAlign:'center',color:'#FEA7CE',fontSize:40}}>BY</Text></TouchableOpacity></View>
-                      <View style={{flex:1,paddingTop:10,paddingBottom:10, paddingleft:5, paddingRight:5}}><TouchableOpacity onPress={()=>this.counterPlay(3) } style={{backgroundColor:this.state.defaultColorBtnThree,height:70, borderRadius:100,justifyContent:'center'}}><Text style={{ textAlign:'center',color:'#FEA7CE',fontSize:25}}>SHARK</Text></TouchableOpacity></View>
-                      <View style={{flex:1,paddingTop:10,paddingBottom:10, paddingleft:5, paddingRight:5}}><TouchableOpacity onPress={()=>this.counterPlay(4) } style={{backgroundColor:this.state.defaultColorBtnFour,height:70, borderRadius:100,justifyContent:'center'}}><Text style={{ textAlign:'center',color:'#FEA7CE',fontSize:40}}>DU</Text></TouchableOpacity></View>
+                      <View style={{flex:1,paddingTop:10,paddingBottom:10, paddingleft:5, paddingRight:5}}><TouchableOpacity onPress={()=>this.counterPlay(1) } style={{backgroundColor:this.state.defaultColorBtnOne ,height:70, borderRadius:100,justifyContent:'center'}}><Text style={{ textAlign:'center',color:'#FEA7CE',fontSize:25}}>ONE</Text></TouchableOpacity></View>
+                      <View style={{flex:1,paddingTop:10,paddingBottom:10, paddingleft:5, paddingRight:5}}><TouchableOpacity onPress={()=>this.counterPlay(2) } style={{backgroundColor:this.state.defaultColorBtnTwo,height:70, borderRadius:100,justifyContent:'center'}}><Text style={{ textAlign:'center',color:'#FEA7CE',fontSize:25}}>TWO</Text></TouchableOpacity></View>
+                      <View style={{flex:1,paddingTop:10,paddingBottom:10, paddingleft:5, paddingRight:5}}><TouchableOpacity onPress={()=>this.counterPlay(3) } style={{backgroundColor:this.state.defaultColorBtnThree,height:70, borderRadius:100,justifyContent:'center'}}><Text style={{ textAlign:'center',color:'#FEA7CE',fontSize:25}}>THREE</Text></TouchableOpacity></View>
+                      <View style={{flex:1,paddingTop:10,paddingBottom:10, paddingleft:5, paddingRight:5}}><TouchableOpacity onPress={()=>this.counterPlay(4) } style={{backgroundColor:this.state.defaultColorBtnFour,height:70, borderRadius:100,justifyContent:'center'}}><Text style={{ textAlign:'center',color:'#FEA7CE',fontSize:25}}>FOUR</Text></TouchableOpacity></View>
                 </View>
           </ViewOverflow>
           </ImageBackground>
